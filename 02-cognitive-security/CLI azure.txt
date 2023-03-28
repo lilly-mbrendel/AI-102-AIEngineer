@@ -1,0 +1,22 @@
+#Login
+az login
+
+#check your subscripition 
+az account show
+
+# If you need to change the subscription, run this command, 
+# changing <Your_Subscription_Id> to the correct subscription ID.
+az account set --subscription <Your_Subscription_Id>
+
+# to get the list of cognitive services keys
+az cognitiveservices account keys list --name <resourceName> --resource-group <resourceGroup>
+
+#to test your cognitive service, you can use curl - a command line tool for HTTP requests. 
+# In the 02-cognitive-security folder, open rest-test.cmd and edit the curl command it contains 
+# (shown below), replacing <yourEndpoint> and <yourKey> with your endpoint URI and Key1 key to use
+# the Text Analytics API in your cognitive services resource.
+curl -X POST "<yourEndpoint>/text/analytics/v3.0/languages?" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: <yourKey>" --data-ascii "{'documents':[{'id':1,'text':'hello'}]}"
+
+#regenerate it in the portal or by using the Azure CLI.
+az cognitiveservices account keys regenerate --name <resourceName> --resource-group <resourceGroup> --key-name key1
+
